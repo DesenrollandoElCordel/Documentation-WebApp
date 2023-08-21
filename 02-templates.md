@@ -66,12 +66,58 @@ Le titre est affiché dans un élément HTML `<section classe="page-pliegos__bre
 
 Si le contenu des boutons (sauf le dernier) est généré depuis le template page_pliegos.html (Voir 2.1. La notice d’un pliego), les boutons eux-mêmes sont affichés avec **toolbar.html**, dans un élément `<paper-button>`. Chaque bouton est relié à son contenu via l’attribut `@id` de l’élément `<paper-button>`, qui est repris par l’attribut `@toggle` du web-component `<pb-drawer>` dans le fichier **page_pliegos.html** (Figure 14).
 
-<img src="images/02-Toolbar-BoutonMetadonnees.png" alt="Exemple de code permettant d'afficher un bouton dans la barre d'outils" width="600"/>
+<img src="images/02-Toolbar-BoutonMetadonnees.png" alt="Exemple de code permettant d'afficher un bouton dans la barre d'outils" width="700"/>
 
 Le bouton “Comparer” n’ouvre pas de panneaux coulissants sur la droite, mais une nouvelle fenêtre dans le navigateur avec l’outil de visualisation *Mirador*. Il est créé avec un élément `<paper-button>`, mais fait appel à la fonction `api:get-manifest` (**modules/api-custom.xql**).
 
 <img src="images/02-Toolbar-FonctionMirador.png" alt="Code permettant d'ajouter un bouton ouvrant Mirador dans un nouvel onglet du navigateur" width="500"/>
 
 Cette fonction ajoute un lien vers la page **mirador.html** et indique, à la fin de l'URL de cette nouvelle page, l’URI du manifeste du document que l’utilisateur est en train de consulter (Pour plus de détails, voir 2.8. La comparaison d’images avec Mirador).
+
+## 2.4. Le menu de navigation : menu.html
+Le menu de navigation est intégré à chaque page avec un élément `<app-toolbar>`. Celui-ci pointe vers le fichier **menu.html**.
+
+[Image]
+
+Ce template contient l’ensemble des composants du menu de navigation : le logo, les divers onglets, la barre de recherche, le choix de la langue et les options de connexion.
+
+Le logo est affiché avec un élément `<a class="logo">`. Cette classe est reprise par la feuille de style **cordel_theme.css** et indique le chemin vers l’image du logo.
+
+[Image]
+
+Les onglets sont affichés soit avec un élément `<a>` (inicio, agenda, enlaces), soit avec un élément `<paper-menu-button>` qui permet d’afficher des sous-onglets (colecciones, proyecto, acerca de). Chaque onglet et sous-onglet a été traduit avec le web-component `<pb-i18n>` sur le même modèle que le reste du site (voir 5. Le multilinguisme).
+
+[Image]
+
+La barre de recherche est affichée avec un web-component `<pb-search>`. De même, l’affichage des langues est géré par un web-component `<pb-lang>`.
+
+[Image]
+
+## 2.5. La liste des contenus (index.html)
+[Image]
+
+L’aide à la recherche est contenue dans une `<div>`, placée avant la `<div class="browse" slot="page">` contenant les facettes et la liste des documents.
+
+Le panneau latéral gauche, qui contient les facettes, est affiché avec le web-component `<pb-custom-form>`. Les boutons “Soumettre” et “Effacer” sont ajoutés avec des éléments `<paper-button>`. Les listes pliables ont été créées avec CSS. Pour la création et la gestion des facettes, voir 4.2 Les facettes.
+
+<img src="images/02-Index-PbCustomForm.png" alt="Code permettant d'afficher les facettes" width="500"/>
+
+Le panneau contenant la liste des documents est affiché avec le web-component `<pb-browse-docs>`. Celui-ci se compose de nombreux attributs. Certains permettent de paramétrer les options de tri : `@sort-options` contient la liste des métadonnées par lesquelles effectuer le tri et `@sort-by`, le mode de tri par défaut. D’autres définissent des filtres de recherche spécifiques à un type de métadonnées (dans le titre par exemple) : `@filter-options` contient la liste des métadonnées dans laquelle faire une recherche, et `@filter-by`, le filtre à afficher par défaut dans la liste déroulante (pour le paramétrage des filtres, voir 4.3. Les options de tri).
+
+<img src="images/02-Index-ListeDocuments.png" alt="Code permettant d'afficher la liste des documents" width="500"/>
+
+La navigation au sein de la liste et le nombre de résultats par page sont paramétrés avec `<pb-paginate>`. L’attribut `@per-page` permet de définir le nombre de documents à afficher par page. L’attribut `@slot="footer"` permet d’ajouter la barre de navigation en bas de la page.
+
+<img src="images/02-Index-Pagination.png" alt="Code permettant d'afficher la liste des documents" width="700"/>
+<img src="images/02-Index-PaginationBottom.png" alt="Code permettant d'afficher la liste des documents" width="700"/>
+
+La liste des documents à proprement parler est affichée avec le template **documents.html**. Il se compose d’une `<div>` qui appelle la fonction xQuery `browse:list-works` (définie dans le module **browse.xql**). Cette `<div>` contient une liste HTML `<ul class="documents">`, dont chaque item `<li class="document">` correspond à un document. Celui-ci est contenu dans une nouvelle `<div class ="document-info">`.
+
+Les métadonnées sont affichées à partir de l’élément `<header>` et de la fonction xQuery `browse:short-header` et de l’ODD. Dans cette dernière, l’élément `<teiHeader>` contient en effet un *model* avec pour prédicat `$parameters?header='short'` (la valeur de ce prédicat est spécifiée par la fonction `browse:short-header` du module **browse.xql**). Nous avons transformé ce model en *modelSequence* afin d’ajouter plusieurs informations : le titre, le thumbnail, le colophon et les titres des parties (Voir 1.9. Les métadonnées).
+
+Par défaut, *TEI-Publisher* ajoute à chaque élément de la liste un bouton de téléchargement. Celui-ci est généré par le template **documents.html**. Nous avons choisi de ne pas afficher ce bouton, le téléchargement étant réservé à la page des contenus (Voir 2.1. La notice d’un pliego). La portion de code correspondant à ce bouton (contenue entre les balises de l’élément `<app-toolbar>` du template **documents.html**) a été commentée.
+
+
+
 
 
