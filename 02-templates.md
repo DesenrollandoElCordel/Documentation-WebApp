@@ -104,12 +104,12 @@ Le panneau latéral gauche, qui contient les facettes, est affiché avec le web-
 
 Le panneau contenant la liste des documents est affiché avec le web-component `<pb-browse-docs>`. Celui-ci se compose de nombreux attributs. Certains permettent de paramétrer les options de tri : `@sort-options` contient la liste des métadonnées par lesquelles effectuer le tri et `@sort-by`, le mode de tri par défaut. D’autres définissent des filtres de recherche spécifiques à un type de métadonnées (dans le titre par exemple) : `@filter-options` contient la liste des métadonnées dans laquelle faire une recherche, et `@filter-by`, le filtre à afficher par défaut dans la liste déroulante (pour le paramétrage des filtres, voir 4.3. Les options de tri).
 
-<img src="images/02-index-ListeDocuments.png" alt="Code permettant d'afficher la liste des documents" width="500"/>
+<img src="images/02-Index-ListeDocuments.png" alt="Code permettant d'afficher la liste des documents" width="500"/>
 
 La navigation au sein de la liste et le nombre de résultats par page sont paramétrés avec `<pb-paginate>`. L’attribut `@per-page` permet de définir le nombre de documents à afficher par page. L’attribut `@slot="footer"` permet d’ajouter la barre de navigation en bas de la page.
 
 <img src="images/02-Index-Pagination.png" alt="Code permettant d'afficher la liste des documents" width="700"/>
-<img src="images/02-Index-PaginationBottom.png" alt="Code permettant d'afficher la liste des documents" width="700"/>
+<img src="images/02-index-PaginationBottom.png" alt="Code permettant d'afficher la liste des documents" width="700"/>
 
 La liste des documents à proprement parler est affichée avec le template **documents.html**. Il se compose d’une `<div>` qui appelle la fonction xQuery `browse:list-works` (définie dans le module **browse.xql**). Cette `<div>` contient une liste HTML `<ul class="documents">`, dont chaque item `<li class="document">` correspond à un document. Celui-ci est contenu dans une nouvelle `<div class ="document-info">`.
 
@@ -154,7 +154,7 @@ Les URL de ces pages ont été réécrites afin de supprimer l’extension .xml.
 
 <img src="images/02-Static-ReecritureUrl.png" alt="Fonction permettant de réécrire les URL des pages statiques" width="500"/>
 
-###2.6.2. Les pages statiques avec peu de texte
+### 2.6.2. Les pages statiques avec peu de texte
 Pour toutes les autres pages, nous avons choisi de créer l’ensemble des pages statiques du site en HTML, afin de faciliter leur design. Chaque page reprend et adapte le modèle du template **index.html**. Elles sont stockées à la racine du dossier **templates**.
 
 ## 2.7. L’affichage des résultats de recherche (search.html)
@@ -169,5 +169,16 @@ Le panneau central avec la liste des résultats est affiché avec le web-compone
 
 <img src="images/02-Search-Resultats.png" alt="Affichage des numéros de page" width="500"/>
 
+## 2.8. La comparaison de documents avec Mirador (mirador.html)
+Depuis la notice d’un document, en cliquant sur le bouton “Comparer”, l’utilisateur accède à l’outil de visualisation *Mirador*. Cet outil est affiché via la page **Mirador.html** et la librairie JavaScript UNPKG. Ainsi, dans le `<head>` de cette page, nous insérons un élément `<script>`, dont la valeur de l’attribut `@src` est le suivant : https://unpkg.com/mirador@latest/dist/mirador.min.js. Ce script permet d’afficher l’interface de *Mirador* dans l’élément `<div id="mirador"/>`.
 
+Nous ajoutons également, avant la balise fermante de `<body>`, un second élément `<script>` contenant les paramètres de *Mirador*, tels que l’affichage des panneaux de contrôle ou le choix de la  langue de l’interface, ainsi que les images à afficher par défaut, c’est-à-dire l’image du document consulté par l’utilisateur et la liste de tous les autres documents de la collection. Pour cela, nous avons recours à un script JavaScript qui récupère l’ID du manifeste contenue dans l’URL de la page (Voir 2.1. La notice d’un pliego) et la concatène avec l’URI de base du serveur IIIF de l’Université de Genève.
 
+<img src="images/02-Mirador-Uri.png" alt="Affichage des numéros de page" width="500"/>
+<img src="images/02-Mirador-Parametres.png" alt="Affichage des numéros de page" width="500"/>
+
+## 2.9. La comparaison de gravures avec VDiff (vdiff.html)
+Depuis la notice d’une gravure, en cliquant sur le bouton “Comparer”, l’utilisateur accède à l’outil de visualisation VDiff. Cet outil est affiché avec le template **vdiff.html**. Il reprend la structure des autres templates, mais intègre des fichiers CSS (**resources/css**) et JavaScript (**resources/js**) supplémentaires assurant son fonctionnement.
+
+## 2.10. Le footer (footer.html)
+Le fichier **footer.html** (dossier templates) contient les éléments à afficher en bas de chaque page. Il est intégré aux templates avec l’élément suivant : `<footer data-template="templates:include" data-template-path="templates/footer.html"/>`.
