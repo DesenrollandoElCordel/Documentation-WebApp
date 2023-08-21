@@ -100,11 +100,11 @@ L’aide à la recherche est contenue dans une `<div>`, placée avant la `<div c
 
 Le panneau latéral gauche, qui contient les facettes, est affiché avec le web-component `<pb-custom-form>`. Les boutons “Soumettre” et “Effacer” sont ajoutés avec des éléments `<paper-button>`. Les listes pliables ont été créées avec CSS. Pour la création et la gestion des facettes, voir 4.2 Les facettes.
 
-<img src="images/02-Index-PbCustomForm.png" alt="Code permettant d'afficher les facettes" width="500"/>
+<img src="images/02-index-PbCustomForm.png" alt="Code permettant d'afficher les facettes" width="500"/>
 
 Le panneau contenant la liste des documents est affiché avec le web-component `<pb-browse-docs>`. Celui-ci se compose de nombreux attributs. Certains permettent de paramétrer les options de tri : `@sort-options` contient la liste des métadonnées par lesquelles effectuer le tri et `@sort-by`, le mode de tri par défaut. D’autres définissent des filtres de recherche spécifiques à un type de métadonnées (dans le titre par exemple) : `@filter-options` contient la liste des métadonnées dans laquelle faire une recherche, et `@filter-by`, le filtre à afficher par défaut dans la liste déroulante (pour le paramétrage des filtres, voir 4.3. Les options de tri).
 
-<img src="images/02-Index-ListeDocuments.png" alt="Code permettant d'afficher la liste des documents" width="500"/>
+<img src="images/02-index-ListeDocuments.png" alt="Code permettant d'afficher la liste des documents" width="500"/>
 
 La navigation au sein de la liste et le nombre de résultats par page sont paramétrés avec `<pb-paginate>`. L’attribut `@per-page` permet de définir le nombre de documents à afficher par page. L’attribut `@slot="footer"` permet d’ajouter la barre de navigation en bas de la page.
 
@@ -117,7 +117,57 @@ Les métadonnées sont affichées à partir de l’élément `<header>` et de la
 
 Par défaut, *TEI-Publisher* ajoute à chaque élément de la liste un bouton de téléchargement. Celui-ci est généré par le template **documents.html**. Nous avons choisi de ne pas afficher ce bouton, le téléchargement étant réservé à la page des contenus (Voir 2.1. La notice d’un pliego). La portion de code correspondant à ce bouton (contenue entre les balises de l’élément `<app-toolbar>` du template **documents.html**) a été commentée.
 
+## 2.6. Les pages statiques
+Nous distinguons deux types de pages statiques : celles avec beaucoup de texte, nécessitant un important travail de traduction, et celles avec peu de texte et quelques traductions (essentiellement les titres). Deux méthodes ont été choisies afin de le créer.
 
+### 2.6.1. Les pages statiques avec beaucoup de textes
+Pages statiques concernées : agenda, aviso legal, contacto, criterios de edición, presentación del proyecto, proceso técnico.
+
+#### 2.6.1.1. La création des pages
+Dans le dossier **Data**, nous avons créé un dossier **Documentation** contenant des fichiers XML-TEI Lite. Chaque fichier correspond à une page statique et contient le texte dans trois `<div>` différentes, identifiée par un attribut `@xml:lang`, correspondant aux trois langues du projet (espagnol, français et anglais).
+
+<img src="images/02-Static-DivXmlLang.png" alt="Structure générale d'une page statique encodée en XML TEI" width="500"/>
+
+#### 2.6.1.2. La création du template
+
+Pour afficher le contenu des fichiers XML-TEI, nous avons créé un nouveau template **static.html** (dans le dossier **templates/pages**). Ce template contient le menu de navigation (`<app-toolbar>`), ainsi que le texte contenu dans le fichier XML du dossier **data/Documentation**, appelé avec le web-component `<pb-view>`.
+
+Pour associer ce template aux fichiers du dossier **Documentation**, il faut modifier la fonction config:collection-config dans le fichier **modules/config.xqm**, sur le même principe que la collection des illustrations (voir 2.2. La notice d’une illustration).
+
+<img src="images/02-Static-ConfigXqm.png" alt="Configuration de la collection Documentation" width="500"/>
+
+Pour la mise en page, des règles spécifiques ont été ajoutées à l’ODD (Voir 1.10. Les pages statiques).
+
+#### 2.6.1.3. La traduction des pages
+Pour que les pages changent de langue en fonction du choix de l’utilisateur, il faut ajouter des attributs aux éléments `<pb-page>` et `<pb-view>` du template **static.html** :
+- `<pb-page>` ⇒ `@require-language="require-language"`
+- `<pb-view>` ⇒ `@use-language="use-language"` ; `@map="change-language"`
+
+La valeur de l’attribut `@map` fait référence à la fonction `mapping:change-language` (**map.xql**). Elle permet d’identifier la langue du site Web et d’afficher le texte dans la langue correspondante, en s’appuyant sur la valeur des `@xml:lang` de chaque fichier TEI.
+
+<img src="images/02-Static-FunctionChangeLanguage.png" alt="Fonction permettant de modifier le texte d’une page en fonction de la langue du site web" width="500"/>
+
+#### 2.6.1.4. La réécriture des URL
+Les URL de ces pages ont été réécrites afin de supprimer l’extension .xml. Pour cela, nous avons ajouté un nouvel endpoint, en nous appuyant sur le modèle du projet *Briefe Edition* :
+- Dans le fichier **custom-api.xml**, nous avons ajouté la fonction `api:view-about`.
+- Dans le fichier **custom-api.json**, nous avons ajouté un nouvel objet `"/Documentation/{doc}"`.
+
+<img src="images/02-Static-ReecritureUrl.png" alt="Fonction permettant de réécrire les URL des pages statiques" width="500"/>
+
+###2.6.2. Les pages statiques avec peu de texte
+Pour toutes les autres pages, nous avons choisi de créer l’ensemble des pages statiques du site en HTML, afin de faciliter leur design. Chaque page reprend et adapte le modèle du template **index.html**. Elles sont stockées à la racine du dossier **templates**.
+
+## 2.7. L’affichage des résultats de recherche (search.html)
+
+[Image]
+
+Ce template permet d’afficher la liste des résultats d’une requête. Le menu de navigation est ajouté avec **menu.html**. De même que pour **index.html**, la navigation au sein des résultats est affichée avec `<pb-paginate>`.
+
+<img src="images/02-Search-Pagination.png" alt="Affichage des numéros de page" width="500"/>
+
+Le panneau central avec la liste des résultats est affiché avec le web-component `<pb-load>`. Le panneau de gauche est contenu dans une `<div class="search-content__panel">`. Celle-ci contient un formulaire de recherche (`<pb-search-form>`). Les facettes et les boutons "Soumettre" et "Effacer" sont ajoutés avec le web-component `<pb-custom-form>`, sur le même modèle que **index.html**.
+
+<img src="images/02-Search-Resultats.png" alt="Affichage des numéros de page" width="500"/>
 
 
 
