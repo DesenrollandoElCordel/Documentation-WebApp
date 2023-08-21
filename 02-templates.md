@@ -1,10 +1,9 @@
 # Les templates
 
 ## La notice d’un pliego : page-pliegos.html
-<figure>
-    <img src="images/02-Page-Item.png" alt="Structure du template page-pliego.html" width="500">
-    <figcaption>Figure 1 : Structure du template **page-pliego.html**</figcaption>
-</figure>
+<img src="images/02-Page-Item.png" alt="Structure du template page-pliego.html" width="500">
+
+*Figure 1 : Structure du template **page-pliego.html***
 
 Ce template permet d’afficher la notice d’un document avec les métadonnées descriptives, le texte et le facsimilé. Il a été créé à partir du template **facsimile.html** proposé par défaut par *TEI-Publisher*.
 
@@ -12,10 +11,9 @@ La page (Figure 1) se compose (de haut en bas) d’un menu de navigation génér
 
 Les métadonnées sont affichées en cliquant sur le bouton “Métadonnées”, qui fait glisser un panneau à gauche. Pour cela, nous avons repris et adapté le code utilisé pour afficher la table des matières. Ainsi, elles sont gérées par le web-component `<pb-drawer toogle="metadataToogle">` (Figure 2). Il contient un web-component `<pb-view>`, avec un attribut `@xpath` ciblant le `<teiHeader>`. Le web-component `<pb-param>` définit des paramètres (avec les attributs `@name` et `@value`), repris par l’ODD pour sélectionner les métadonnées à afficher, en utilisant le prédicat suivant lors de la création du *model sequence* : `$parameters?mode='commentary'`. Pour le choix des métadonnées, voir 1.9. Les métadonnées.
 
-<figure>
-    <img src="images/02-Page-item-Metadata.png" alt="Code permettant d'afficher les métadonnées" width="500">
-    <figcaption>Figure 2 : Structure du web-component <code>pb-drawer</code> permettant d’afficher les métadonnées</figcaption>
-</figure>
+<img src="images/02-Page-item-Metadata.png" alt="Code permettant d'afficher les métadonnées" width="500">
+
+*Figure 2 : Structure du web-component `pb-drawer` permettant d’afficher les métadonnées*
 
 L’affichage des métadonnées concernant les gravures suit le même procédé (Figure 3), mais avec le paramètre suivant : `$parameters?mode='figures'`.
 
