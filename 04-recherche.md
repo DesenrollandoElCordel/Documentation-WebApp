@@ -4,7 +4,7 @@
 Les règles d’indexation du corpus sont spécifiées dans le fichier **collection.xconf**. Elles sont contenues dans un élément `<lucene>`. Nous lui avons ajouté un attribut `@diacritics`, avec pour valeur “no”, permettant de faire des recherches sans tenir compte des accents.
 Cet élément contient des sous-éléments `<text>` avec un attribut `@qname` qui cible les éléments TEI à indexer (Attention à ne pas oublier le namespace devant le nom de l’élément !).
 
-<img src="images/04-Recherche-Lucene.png" width="500" alt="Indexation du texte avec Lucene"/>
+<img src="images/04-Recherche-Lucene.png" width="700" alt="Indexation du texte avec Lucene"/>
 
 Ces règles permettent d’effectuer des recherches dans le texte brut des documents, dont les résultats sont affichés via le template **search.html** (Voir 2.7 L’affichage des résultats). Les modalités de recherche et d’affichage (i.e. kwic, nombre de résultats, breadcrumbs, etc.) sont, quant à elles, définies dans le module **query-tei.xql**. Pour les besoins de notre projet, nous avons modifié la fonction `teis:get-breadcrumbs`.
 
@@ -32,8 +32,8 @@ Ces catégories sont ensuite utilisées dans les fichiers TEI, avec un élément
 
 Dans le fichier **index.xql**, pour chaque catégorie de mots-clés du fichier **taxonomy.xml**, nous créons une fonction qui cible cette catégorie (ex: `idx:get-femenino`) et indexe les mots-clés, afin de créer les facettes correspondantes. Cette fonction est à son tour utilisée par la fonction `idx:get-metadata`.
 
-<img src="images/04-Recherche-FacettesFonction1.png" width="500" alt="Exemple de fonction permettant d’afficher les mots-clés relatifs aux personnages féminins"/>
-<img src="images/04-Recherche-FacettesFonction2.png" width="200" alt="Utilisation de la fonction idx:get-femenino dans la fonction idx:get-metadata"/>
+<img src="images/04-Recherche-FacettesFonction1.png" width="600" alt="Exemple de fonction permettant d’afficher les mots-clés relatifs aux personnages féminins"/>
+<img src="images/04-Recherche-FacettesFonction2.png" width="300" alt="Utilisation de la fonction idx:get-femenino dans la fonction idx:get-metadata"/>
 
 ### 4.2.2. Étape 2 : Configuration de l’affichage (config.xqm)
 L’affichage des facettes (via **index.html** et **search.html**) est spécifié dans le fichier **config.xqm**, avec la variable `$config:facets`. Chaque facette est décrite avec une `map`. Celle-ci indique l’identifiant de la facette à paramètrer (i.e. celui défini dans **index.xql**), le titre à afficher, le nombre de facettes maximum à montrer (les autres seront affichées par l’utilisateur en cliquant sur une case), leur aspect hiérarchique (i.e. si les informations sont imbriquées les unes dans les autres), ainsi que la manière de les traduire à l’aide de web-component `<pb-i18n>`.
@@ -56,12 +56,12 @@ Lorsque l’utilisateur sélectionne une facette, la liste des contenus se modif
 
 Dans le template **index.html**, nous avons commenté le script Javascript qui gère les facettes dynamiques, et ajouté deux éléments `<paper-button>` pour soumettre et effacer une requête. Le bouton "Effacer" fait appel à une fonction Javascript spécifique, placée avant la balise fermante de `<body>`.
 
-<img src="images/04-Recherche-Facettes-PaperButton.png" width="500" alt="Affichage des boutons Soumettre et Effacer"/>
-<img src="images/04-Recherche-Facettes-ScriptReset.png" width="300" alt="Script permettant de réinitialiser les facettes sélectionnées"/>
+<img src="images/04-Recherche-Facettes-PaperButton.png" width="700" alt="Affichage des boutons Soumettre et Effacer"/>
+<img src="images/04-Recherche-Facettes-ScriptReset.png" width="500" alt="Script permettant de réinitialiser les facettes sélectionnées"/>
 
 Dans le fichier **facets.xql**, nous avons modifié la fonction `facets:display` afin que celle-ci permette de sélectionner plusieurs facettes et d’afficher les résultats correspondant.
 
-<img src="images/04-Recherche-FacettesFonctionDisplay.png" width="500" alt="Fonction facets:display permettant de sélectionner plusieurs facettes"/>
+<img src="images/04-Recherche-FacettesFonctionDisplay.png" width="700" alt="Fonction facets:display permettant de sélectionner plusieurs facettes"/>
 
 ## 4.3. Les options de tri
 Les *fields* permettent de trier les documents d’une collection ou d’effectuer des requêtes dans un champ de métadonnées spécifique. Dans notre cas, nous avons choisi de trier les documents par titre et par date.
@@ -69,10 +69,10 @@ Les *fields* permettent de trier les documents d’une collection ou d’effectu
 ### 4.3.1. Étape 1 : L’indexation (collection.xconf)
 Les options de tri sont définies sur le même modèle que les facettes, en utilisant l’élément `<field>`. Il se compose d’un attribut `@name`, qui donne un identifiant au filtre, et d’un attribut `@expression`, qui indique à l’aide d’une expression XPath, les éléments TEI sur lesquels repose le filtre. Il est également possible d’associer des types de valeurs XQuery (`xs:date`, `xs:integer`, etc.), qui améliorent les performances du tri. Ainsi, pour le filtre “date”, nous avons ajouté un `@type="xs:date"`.
 
-<img src="images/04-Recherche-FacettesFonctionDisplay.png" width="500" alt="Création d’option de tri avec collection.xconf"/>
+<img src="images/04-Recherche-FacettesFonctionDisplay.png" width="700" alt="Création d’option de tri avec collection.xconf"/>
 
 ### 4.3.2. Étape 2 : L’affichage des options de tri (index.html)
 Le choix des options de tri est défini dans le fichier **index.html** avec le web-component `<pb-browse-docs>`. Il se compose tout d’abord d’un attribut `@sort-options`. Sa valeur est une map, constituée d’un label avec le nom à afficher sur l’interface et d’une valeur qui reprend la valeur de l’attribut `@name` dans le fichier **collection.xconf**.
 L’attribut `@filter-options` est construit sur le même modèle que `@sort-options`. Il permet d’afficher une barre de recherche dédiée à une métadonnée en particulier. Dans notre cas, nous avons uniquement choisi de faire des recherches dans les titres.
 
-<img src="images/04-Recherche-OptionsFiltres.png" width="500" alt="Affichage des options de tri depuis index.html"/>
+<img src="images/04-Recherche-OptionsFiltres.png" width="800" alt="Affichage des options de tri depuis index.html"/>
