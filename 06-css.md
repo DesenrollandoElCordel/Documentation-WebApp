@@ -1,4 +1,4 @@
-# Les feuilles de style
+# 6. Les feuilles de style
 
 L’ensemble des styles, c’est-à-dire ceux de la feuille de style par défaut (**theme.css**) et ceux contenus dans chaque template, a été réuni au sein d’une feuille de style unique (sauf pour **index.html**) : **cordel_theme.css**. Lorsque cela est possible, nous privilégions les classes à l’usage des identifiants ou des éléments. Les noms des classes respectent, dans la mesure du possible, la méthodologie BEM (Bloc Éléments Modificateurs) : `[Bloc parent]_ _[Fonction]--[Modificateur]`.
 
