@@ -15,5 +15,7 @@ Le contenu de ce *hamburger menu* est affiché depuis le template **drawer.html*
 
 Chaque template appelle le template **drawer.html** avec l’élément `<app-drawer>` et l’attribut `@data-template-path`. Cet élément doit être placé entre la balise ouvrante de `<app-drawer-layout>` et celle de `<app-header-layout>`.
 
+<img src="images/07-Responsive-Pages.png" width="600" alt="Insertion du hamburger menu dans le template d’une page HTML"/>
+
 En ce qui concerne le template index.html, il faut enlever l’élément `<app-drawer>` (`@slot="toggle"`) qui définit le contenu du *hamburger menu*, et utiliser à la place le template **drawer.html** (même emplacement que dans les autres templates).
 Attention ! Pour la page **search.html**, après l’élément `<pb-page>` il faut ajouter l’élément `<app-drawer-layout force-narrow="force-narrow">`, puis l’élément `<app-drawer>` qui fait le lien vers **drawer.html**.
