@@ -53,7 +53,7 @@ Enfin, l’image est affichée avec l’élément `<div data-template="api:displ
 ## 2.3. La barre d’outils : toolbar.html
 Ce template permet d’afficher le titre du document et une barre d’outil : par défaut, *TEI-Publisher* propose une table des matières (générée à partir des `<div>` et des `<head>` du fichier TEI), l’affichage de la collection d’origine, des zooms, des boutons de navigations et l’accès au fichier source du document. Dans notre cas, nous avons uniquement conservé le titre et la table des matières, auxquels nous avons ajouté quatre autres boutons pour l’affichage de métadonnées (document et gravures), pour le téléchargement et pour la comparaison de documents avec *Mirador*.
 
-<img src="images/02-Toolbar.png" alt="Code permettant d'afficher le fil d'ariane et le titre d'un document" width="500"/>
+<img src="images/02-Toolbar.png" alt="Code permettant d'afficher le fil d'ariane et le titre d'un document" width="600"/>
 
 Le fil d’ariane est créé avec une fonction XQuery, qui se trouve dans le fichier **modules/custom-api.xql**, et intégré dans la barre d’outil avec l’élément `<div data-template="api:breadcrumbs-pliegos"/>`.
 
@@ -84,15 +84,15 @@ Le logo est affiché avec un élément `<a class="logo">`. Cette classe est repr
 
 Les onglets sont affichés soit avec un élément `<a>` (inicio, agenda, enlaces), soit avec un élément `<paper-menu-button>` qui permet de créer des *dropdown-menu*, c'est-à-dire des sous-onglets (colecciones, resultados, acerca de). Chaque onglet et sous-onglet a été traduit avec le web-component `<pb-i18n>` sur le même modèle que le reste du site (voir 5. Le multilinguisme).
 
-<img src="images/02-Menu-onglet-simple.png" alt="Affichage du menu de navigation avec l'élément app-toolbar" width="350"/>
-<img src="images/02-Menu-DropdownMenu.png" alt="Affichage du menu de navigation avec l'élément app-toolbar" width="500"/>
+<img src="images/02-Menu-onglet-simple.png" alt="Création d'un onglet simple" width="350"/>
+<img src="images/02-Menu-dropdownMenu.png" alt="Création d'un dropdown-menu" width="500"/>
 
 La barre de recherche est affichée avec un web-component `<pb-search>`. De même, l’affichage des langues est géré par un web-component `<pb-lang>`.
 
-<img src="images/02-Menu-SearchLang.png" alt="Affichage du menu de navigation avec l'élément app-toolbar" width="500"/>
+<img src="images/02-Menu-searchLang.png" alt="Affichage de la barre de recherche et des options de traduction du site" width="500"/>
 
 ## 2.5. La liste des contenus (index.html)
-<img src="images/02-Index.png" alt="Code permettant d'afficher les facettes" width="500"/>
+<img src="images/02-Index.png" alt="Structure de la liste des documents" width="600"/>
 
 L’aide à la recherche est contenue dans une `<div>`, placée avant la `<div class="browse" slot="page">` contenant les facettes et la liste des documents.
 
@@ -102,7 +102,7 @@ Le panneau latéral gauche, qui contient les facettes, est affiché avec le web-
 
 Le panneau contenant la liste des documents est affiché avec le web-component `<pb-browse-docs>`. Celui-ci se compose de nombreux attributs. Certains permettent de paramétrer les options de tri : `@sort-options` contient la liste des métadonnées par lesquelles effectuer le tri et `@sort-by`, le mode de tri par défaut. D’autres définissent des filtres de recherche spécifiques à un type de métadonnées (dans le titre par exemple) : `@filter-options` contient la liste des métadonnées dans laquelle faire une recherche, et `@filter-by`, le filtre à afficher par défaut dans la liste déroulante (pour le paramétrage des filtres, voir 4.3. Les options de tri).
 
-<img src="images/02-Index-ListeDocuments.png" alt="Code permettant d'afficher la liste des documents" width="500"/>
+<img src="images/02-Index-ListeDocuments.png" alt="Code permettant d'afficher la liste des documents" width="550"/>
 
 La navigation au sein de la liste et le nombre de résultats par page sont paramétrés avec `<pb-paginate>`. L’attribut `@per-page` permet de définir le nombre de documents à afficher par page. L’attribut `@slot="footer"` permet d’ajouter la barre de navigation en bas de la page.
 
@@ -124,7 +124,7 @@ Pages statiques concernées : agenda, aviso legal, contacto, criterios de edici�
 #### 2.6.1.1. La création des pages
 Dans le dossier **Data**, nous avons créé un dossier **Documentation** contenant des fichiers XML-TEI Lite. Chaque fichier correspond à une page statique et contient le texte dans trois `<div>` différentes, identifiée par un attribut `@xml:lang`, correspondant aux trois langues du projet (espagnol, français et anglais).
 
-<img src="images/02-Static-DivXmlLang.png" alt="Structure générale d'une page statique encodée en XML TEI" width="500"/>
+<img src="images/02-Static-DivXmlLang.png" alt="Structure générale d'une page statique encodée en XML TEI" width="400"/>
 
 #### 2.6.1.2. La création du template
 
@@ -132,7 +132,7 @@ Pour afficher le contenu des fichiers XML-TEI, nous avons créé un nouveau temp
 
 Pour associer ce template aux fichiers du dossier **Documentation**, il faut modifier la fonction config:collection-config dans le fichier **modules/config.xqm**, sur le même principe que la collection des illustrations (voir 2.2. La notice d’une illustration).
 
-<img src="images/02-Static-ConfigXqm.png" alt="Configuration de la collection Documentation" width="500"/>
+<img src="images/02-Static-ConfigXqm.png" alt="Configuration de la collection Documentation" width="400"/>
 
 Pour la mise en page, des règles spécifiques ont été ajoutées à l’ODD (Voir 1.10. Les pages statiques).
 
@@ -157,11 +157,11 @@ Pour toutes les autres pages, nous avons choisi de créer l’ensemble des pages
 
 ## 2.7. L’affichage des résultats de recherche (search.html)
 
-<img src="images/02-Search.png" alt="Structure des résultats de recherche" width="500"/>
+<img src="images/02-Search.png" alt="Structure des résultats de recherche" width="600"/>
 
 Ce template permet d’afficher la liste des résultats d’une requête. Le menu de navigation est ajouté avec **menu.html**. De même que pour **index.html**, la navigation au sein des résultats est affichée avec `<pb-paginate>`.
 
-<img src="images/02-Search-Pagination.png" alt="Affichage des numéros de page" width="500"/>
+<img src="images/02-Search-Pagination.png" alt="Affichage des numéros de page" width="550"/>
 
 Le panneau central avec la liste des résultats est affiché avec le web-component `<pb-load>`. La barre de recherche à gauche est contenue dans une `<div class="search-content__panel">`.
 
