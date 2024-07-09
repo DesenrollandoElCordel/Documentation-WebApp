@@ -1,4 +1,6 @@
 # 2. Les templates
+[2.1. Les pliegos](#2.1-La-notice-d’un-pliego-:-page-pliegos.html)
+[2.2. Les illustrations](#2.2.-La-notice-d'une-illustration)
 
 ## 2.1. La notice d’un pliego : page-pliegos.html
 <img src="images/02-Page-Item.png" alt="Structure du template page-pliego.html" width="500"/>
@@ -26,7 +28,7 @@ Le web-component `<pb-facsimile>` permet d’afficher les images du document via
 
 <img src="images/02-Page-Item-Facsimile.png" alt="Code permettant d'afficher les images numérisées d'un document" width="500"/>
 
-## 2.2. La notice d’une illustration (illustration.html)
+## 2.2. La notice d’une illustration
 
 *TEI-Publisher* permet de définir des templates spécifiques en fonction des collections. Dans le fichier **config.xqm**, il faut modifier la fonction `config:collection-config`. Si la collection s’appelle “Ilustraciones”, alors on applique le template **illustration.html**. Sinon, on applique le template par défaut défini dans le même fichier avec la fonction `config:default-template`.
 
