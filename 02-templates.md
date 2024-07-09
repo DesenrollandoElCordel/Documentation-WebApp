@@ -1,15 +1,13 @@
 # 2. Les templates
-[2.1. Les pliegos](#2.1-La-notice-d’un-pliego-:-page-pliegos.html)
-[2.2. Les illustrations](#2.2.-La-notice-d'une-illustration)
 
-## 2.1. La notice d’un pliego : page-pliegos.html
+## 2.1. Les documents
 <img src="images/02-Page-Item.png" alt="Structure du template page-pliego.html" width="500"/>
 
 Ce template permet d’afficher la notice d’un document avec les métadonnées descriptives, le texte et le facsimilé. Il a été créé à partir du template **facsimile.html** proposé par défaut par *TEI-Publisher*.
 
 La page se compose (de haut en bas) d’un menu de navigation général appelé depuis le template **menu.html** ; d’une barre d’outil appelée depuis le template **toolbar.html** ; d’un espace de consultation des métadonnées et des images ; et d’un pied de page. Les métadonnées, le contenu de la table des matières, les informations sur les gravures et les options de téléchargement sont créés avec l’élément `<pb-drawer>`, qui se situe entre l’élément `<app-header>` et l’élément `<main>`.
 
-Les métadonnées sont affichées en cliquant sur le bouton “Métadonnées”, qui fait apparaître un panneau à gauche. Pour cela, nous avons repris et adapté le code utilisé pour afficher la table des matières. Ainsi, elles sont gérées par le web-component `<pb-drawer toogle="metadataToogle">`. Il contient un web-component `<pb-view>`, avec un attribut `@xpath` ciblant le `<teiHeader>`. Le web-component `<pb-param>` définit des paramètres (avec les attributs `@name` et `@value`), repris par l’ODD pour sélectionner les métadonnées à afficher, en utilisant le prédicat suivant lors de la création du *model sequence* : `$parameters?mode='commentary'`. Pour le choix des métadonnées, voir 1.9. Les métadonnées.
+Les métadonnées sont affichées en cliquant sur le bouton “Métadonnées”, qui fait apparaître un panneau à gauche. Pour cela, nous avons repris et adapté le code utilisé pour afficher la table des matières. Ainsi, elles sont gérées par le web-component `<pb-drawer toogle="metadataToogle">`. Il contient un web-component `<pb-view>`, avec un attribut `@xpath` ciblant le `<teiHeader>`. Le web-component `<pb-param>` définit des paramètres (avec les attributs `@name` et `@value`), repris par l’ODD pour sélectionner les métadonnées à afficher, en utilisant le prédicat suivant lors de la création du *model sequence* : `$parameters?mode='commentary'`.
 
 <img src="images/02-Page-item-Metadata.png" alt="Code permettant d'afficher les métadonnées" width="500"/>
 
@@ -24,11 +22,11 @@ En ce qui concerne le téléchargement du code source XML TEI et celui des image
 <img src="images/02-Page-Item-fonction2.png" alt="Code permettant de télécharger des fichiers TEI" width="500"/>
 
 Le contenu principal de la page est défini avec l’élément `<main class="page-pliegos_ _content-body">`. La transcription est affichée avec un autre web-component `<pb-view>`, lequel est encadré par deux web-components `<pb-navigation>` permettant de changer de pages.
-Le web-component `<pb-facsimile>` permet d’afficher les images du document via le protocole IIIF. L’URI de base est celui du serveur de l’Université de Genève : “https://iiif.unige.ch/iiif/2/”. À cet URI, est concaténé le nom le nom de l’image sur le serveur IIIF. Celui-ci est indiqué dans les fichiers TEI, avec l’élément `<pb/>` et son attribut `@facs`. Dans l’ODD, cet élément est transformé en web-component `<pb-facs-link>`, ce qui permet ainsi d’afficher les images dans `<pb-facsimile>`.
+Le web-component `<pb-facsimile>` permet d’afficher les images du document via le protocole IIIF. L’URI de base est celui du serveur de l’Université de Genève : “https://iiif.hedera.unige.ch/iiif/3/pliegos/”. À cet URI, est concaténé le nom le nom de l’image sur le serveur IIIF. Celui-ci est indiqué dans les fichiers TEI, avec l’élément `<pb/>` et son attribut `@facs`. Dans l’ODD, cet élément est transformé en web-component `<pb-facs-link>`, ce qui permet ainsi d’afficher les images dans `<pb-facsimile>`.
 
 <img src="images/02-Page-Item-Facsimile.png" alt="Code permettant d'afficher les images numérisées d'un document" width="500"/>
 
-## 2.2. La notice d’une illustration
+## 2.2. Les illustrations
 
 *TEI-Publisher* permet de définir des templates spécifiques en fonction des collections. Dans le fichier **config.xqm**, il faut modifier la fonction `config:collection-config`. Si la collection s’appelle “Ilustraciones”, alors on applique le template **illustration.html**. Sinon, on applique le template par défaut défini dans le même fichier avec la fonction `config:default-template`.
 
@@ -63,7 +61,7 @@ Le titre est affiché dans un élément HTML `<section classe="page-pliegos__bre
 
 <img src="images/02-Toolbar-Titre.png" alt="Code permettant d'afficher le fil d'ariane et le titre d'un document" width="500"/>
 
-Si le contenu des boutons (sauf le dernier) est généré depuis le template page_pliegos.html (Voir 2.1. La notice d’un pliego), les boutons eux-mêmes sont affichés avec **toolbar.html**, dans un élément `<paper-button>`. Chaque bouton est relié à son contenu via l’attribut `@id` de l’élément `<paper-button>`, qui est repris par l’attribut `@toggle` du web-component `<pb-drawer>` dans le fichier **page_pliegos.html** (Figure 14).
+Si le contenu des boutons (sauf le dernier) est généré depuis le template page_pliegos.html (Voir 2.1. La notice d’un pliego), les boutons eux-mêmes sont affichés avec **toolbar.html**, dans un élément `<paper-button>`. Chaque bouton est relié à son contenu via l’attribut `@id` de l’élément `<paper-button>`, qui est repris par l’attribut `@toggle` du web-component `<pb-drawer>` dans le fichier **page_pliegos.html**.
 
 <img src="images/02-Toolbar-BoutonMetadonnees.png" alt="Exemple de code permettant d'afficher un bouton dans la barre d'outils" width="700"/>
 
@@ -136,7 +134,7 @@ Pour associer ce template aux fichiers du dossier **Documentation**, il faut mod
 
 <img src="images/02-Static-ConfigXqm.png" alt="Configuration de la collection Documentation" width="400"/>
 
-Pour la mise en page, des règles spécifiques ont été ajoutées à l’ODD (Voir 1.10. Les pages statiques).
+Pour la mise en page, des règles spécifiques ont été ajoutées à l’ODD.
 
 #### 2.6.1.3. La traduction des pages
 Pour que les pages changent de langue en fonction du choix de l’utilisateur, il faut ajouter des attributs aux éléments `<pb-page>` et `<pb-view>` du template **static.html** :

@@ -17,7 +17,7 @@ La fonction `idx:get-metadata` permet de définir les métadonnées à transform
 
 <img src="images/04-Recherche-FacettesDoc.png" width="500" alt="Facettes pour la collection Pliegos"/>
 
-Sur le modèle du projet Van Gogh, nous avons ajouté une fonction (`idx:parse-date`) permettant de regrouper les dates sous un même label (Années 1840, 1850, etc.).
+Sur le modèle du [projet Van Gogh](https://gitlab.existsolutions.com/tei-publisher/vangogh), nous avons ajouté une fonction (`idx:parse-date`) permettant de regrouper les dates sous un même label (Années 1840, 1850, etc.).
 
 <img src="images/04-Recherche-Facette-IndexDates.png" width="300" alt="Fonction permettant de regrouper les dates sous différents labels"/>
 
@@ -36,12 +36,12 @@ Dans le fichier **index.xql**, pour chaque catégorie de mots-clés du fichier *
 <img src="images/04-Recherche-FacettesFonction2.png" width="300" alt="Utilisation de la fonction idx:get-femenino dans la fonction idx:get-metadata"/>
 
 ### 4.2.2. Étape 2 : Configuration de l’affichage (config.xqm)
-L’affichage des facettes (via **index.html** et **search.html**) est spécifié dans le fichier **config.xqm**, avec la variable `$config:facets`. Chaque facette est décrite avec une `map`. Celle-ci indique l’identifiant de la facette à paramètrer (i.e. celui défini dans **index.xql**), le titre à afficher, le nombre de facettes maximum à montrer (les autres seront affichées par l’utilisateur en cliquant sur une case), leur aspect hiérarchique (i.e. si les informations sont imbriquées les unes dans les autres), ainsi que la manière de les traduire à l’aide de web-component `<pb-i18n>`.
+L’affichage des facettes (via **index.html**) est spécifié dans le fichier **config.xqm**, avec la variable `$config:facets`. Chaque facette est décrite avec une `map`. Celle-ci indique l’identifiant de la facette à paramètrer (i.e. celui défini dans **index.xql**), le titre à afficher, le nombre de facettes maximum à montrer (les autres seront affichées par l’utilisateur en cliquant sur une case), leur aspect hiérarchique (i.e. si les informations sont imbriquées les unes dans les autres), ainsi que la manière de les traduire à l’aide de web-component `<pb-i18n>`.
 
 <img src="images/04-Recherche-FacettesConfig.png" width="500" alt="Exemple de paramétrage des facettes avec $config:facets"/>
 
 ### 4.2.3. Étape 3 : L’indexation des facettes (collection.xconf)
-Pour indexer les informations et créer les facettes, il faut ajouter dans l’élément `<text>` du fichier **collection.xconf** des sous-éléments `<facet>` (Figure 41). Ceux-ci se composent d’un attribut `@dimension`, qui cible l’identifiant défini dans **index.xql**, et d’un attribut `@expression` indiquant, sous la forme d’une fonction, les éléments TEI à indexer. Le seul élément à modifier dans cette fonction est le deuxième élément de la parenthèse, qui reprend l’identifiant choisi dans **index.xql**.
+Pour indexer les informations et créer les facettes, il faut ajouter dans l’élément `<text>` du fichier **collection.xconf** des sous-éléments `<facet>`. Ceux-ci se composent d’un attribut `@dimension`, qui cible l’identifiant défini dans **index.xql**, et d’un attribut `@expression` indiquant, sous la forme d’une fonction, les éléments TEI à indexer. Le seul élément à modifier dans cette fonction est le deuxième élément de la parenthèse, qui reprend l’identifiant choisi dans **index.xql**.
 
 Lors de la sauvegarde de ce fichier (toujours depuis *Exide*), l’ensemble des données sera ré-indexé à partir des nouvelles règles définies.
 
@@ -69,7 +69,7 @@ Les *fields* permettent de trier les documents d’une collection ou d’effectu
 ### 4.3.1. Étape 1 : L’indexation (collection.xconf)
 Les options de tri sont définies sur le même modèle que les facettes, en utilisant l’élément `<field>`. Il se compose d’un attribut `@name`, qui donne un identifiant au filtre, et d’un attribut `@expression`, qui indique à l’aide d’une expression XPath, les éléments TEI sur lesquels repose le filtre. Il est également possible d’associer des types de valeurs XQuery (`xs:date`, `xs:integer`, etc.), qui améliorent les performances du tri. Ainsi, pour le filtre “date”, nous avons ajouté un `@type="xs:date"`.
 
-<img src="images/04-Recherche-FacettesFonctionDisplay.png" width="700" alt="Création d’option de tri avec collection.xconf"/>
+<img src="images/04-Recherche-Filtres.png" width="700" alt="Création d’option de tri avec collection.xconf"/>
 
 ### 4.3.2. Étape 2 : L’affichage des options de tri (index.html)
 Le choix des options de tri est défini dans le fichier **index.html** avec le web-component `<pb-browse-docs>`. Il se compose tout d’abord d’un attribut `@sort-options`. Sa valeur est une map, constituée d’un label avec le nom à afficher sur l’interface et d’une valeur qui reprend la valeur de l’attribut `@name` dans le fichier **collection.xconf**.

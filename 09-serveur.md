@@ -1,4 +1,4 @@
-# 8. La mise en place du serveur
+# 9. La mise en place du serveur
 
 Pour mettre en ligne le site web, nous avons besoin d’un serveur proxy, dans notre cas [Apache HTTP Server](https://httpd.apache.org/), afin que les utilisateurs interagissent avec ce serveur, et non directement avec *eXist-DB* qui leur est “caché” (*reverse-proxy*). Étapes à suivre :
 

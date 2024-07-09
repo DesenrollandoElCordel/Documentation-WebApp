@@ -7,5 +7,4 @@ L’ensemble des styles, c’est-à-dire ceux de la feuille de style par défaut
 Les styles propres à certains éléments TEI (comme les titres ou les métadonnées) sont définis avec la feuille de style **odd_style.css** (**/resources/odd**).
 La charte graphique utilisée est la suivante :
 - Couleur primaire (Vert) : #85A782
-- Couleur secondaire (Violet) : #9999CC
-- Couleur d’accentuation (Jaune pâle) : #F6EDD9
+- Couleur secondaire (Violet) : #663399

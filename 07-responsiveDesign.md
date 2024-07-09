@@ -4,7 +4,7 @@ La plupart des règles pour le *responsive design* (*media queries*) sont géré
 
 <img src="images/07-Responsive-Css.png" width="350" alt="Exemples de media queries pour gérer l’affichage des facsimiles et des gravures sur les notices de documents pour des écrans de moins de 769px"/>
 
-Une exception est faite pour le menu de navigation. En effet, pour créer un menu responsive, TEI-Publisher a recours au web component <pb-media-query>, dont l’attribut @query précise la taille de l’écran. Nous avons adapté à nos besoins le code proposé par défaut et appliqué ce code à l’ensemble des pages (Par défaut, TEI-Publisher a choisi des méthodes différentes en fonction des pages).
+Une exception est faite pour le menu de navigation. En effet, pour créer un menu responsive, TEI-Publisher a recours au web component `<pb-media-query>`, dont l’attribut `@query` précise la taille de l’écran. Nous avons adapté à nos besoins le code proposé par défaut et appliqué ce code à l’ensemble des pages (Par défaut, TEI-Publisher a choisi des méthodes différentes en fonction des pages).
 Le menu de navigation est créé avec **menu.html**. Ce fichier contient un premier élément `<pb-media-query>` qui gère l’affichage du menu pour des écrans de plus de 1024px ; le second élément `<pb-media-query>`, les écrans de moins de 1024px. Dans ce cas, la barre de menu est réduite au logo du projet, à la barre de recherche et à l’icône d’un *hamburger menu*.
 
 <img src="images/07-Responsive-Menu.png" width="600" alt="Affichage du menu pour les écrans de moins de 1024px"/>

@@ -14,6 +14,3 @@ Par exemple, pour traduire le label des facettes, dans chaque fichier .json, il 
 <img src="images/05-I18n-JsonEnglish.png" width="300" alt="Traduction en anglais du nom des facettes"/>
 
 Cette clé est ensuite reprise dans le fichier **config.xqm** (variable `$config:facets` : Voir 4.2.2. Configuration de l’affichage) de la manière suivante : facets.[cle_unique]. Par exemple, pour afficher les traductions du label de la facette “Collection”, il faut utiliser `facets.collection`.
-La clé “more” est utilisée avec le web-component `<pb-i18n>` dans le fichier facets.xql (`fonction facets:display`, Figure 51).
-
-<img src="images/05-I18n-More.png" width="800" alt="Exemple de traduction d’une portion de texte"/>
