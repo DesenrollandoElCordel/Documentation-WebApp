@@ -9,4 +9,4 @@ Pour la création d'application, nous avons suivi la [documentation](https://tei
 - Un formulaire permet de renseigner les paramètres de base de son application, comme l'URL, le nom, l'ODD ou le gabarit HTML.
 - Cliquer sur **Sauvegarder et générer**.
 - Se déconnecter du compte tei-demo et fermer *TEI-Publisher*.
-- L'application créée apparaît désormais sur le tableau de bord d'eXist-DB et peut être personnaliser depuis l'éditeur XML *Exide* ou depuis *Oxygen XML Editor* via le *Data Source Explorer*.
+- L'application créée apparaît désormais sur le tableau de bord d'eXist-DB et peut être personnalisée depuis l'éditeur XML *Exide* ou depuis *Oxygen XML Editor* via le *Data Source Explorer*.

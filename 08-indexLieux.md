@@ -18,7 +18,7 @@ La création de l'index des noms de lieu s'appuie sur le [tutoriel](https://faq.
 
 - Pour que des *pointers* signalant des lieux apparaissent sur cette carte, il est nécessaire de créer un nouveau *API endpoint* dans le fichier **custom-api.json**, avec pour path `/api/places/all`. Ce nouveau endpoint nécessite à son tour une fonction (`api:places-all`), à ajouter dans le fichier **custom-api.xql**. Elle récupère le nom du lieu et ses coordonnées géographiques afin de les afficher sur la carte.
 
-<img src="images/08-placesAll.png" width="500" alt="Code permettant d'afficher les noms de lieu sur la carte"/>
+<img src="images/08-PlacesAll.png" width="500" alt="Code permettant d'afficher les noms de lieu sur la carte"/>
 
 - Réécriture de l'URL à l'aide d'un nouveau endpoint (path : `/contexts/places`) sous la forme **desenrollandoelcordel.unige.ch/contexts/places**.
 
@@ -34,7 +34,7 @@ Ces informations sont extraites des fichiers TEI à l'aide de la fonction `api:p
 <img src="images/08-placeMentions2.png" width="500" alt="Code permettant d'afficher les métadonnées d'un nom de lieu"/>
 <img src="images/08-documentList.png" width="350" alt="Code permettant d'afficher la liste des documents où un nom de lieu apparaît"/>
 
-Les URLs de ces notices sont également réécrites sous la forme **desenrollandoelcordel.unige.ch/contexts/places/Barcelona**, en ajoutant un endpoint (path : `/contexts/places/{name}`) dans le fichier **custom-api.json**.
+Les URLs de ces notices sont également réécrits sous la forme **desenrollandoelcordel.unige.ch/contexts/places/Barcelona**, en ajoutant un endpoint (path : `/contexts/places/{name}`) dans le fichier **custom-api.json**.
 
 ## 8.3. L'affichage de la liste des noms de lieu (page-pliegos.html)
 

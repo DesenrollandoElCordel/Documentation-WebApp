@@ -6,7 +6,7 @@ Cet élément contient des sous-éléments `<text>` avec un attribut `@qname` qu
 
 <img src="images/04-Recherche-Lucene.png" width="700" alt="Indexation du texte avec Lucene"/>
 
-Ces règles permettent d’effectuer des recherches dans le texte brut des documents, dont les résultats sont affichés via le template **search.html** (Voir 2.7 L’affichage des résultats). Les modalités de recherche et d’affichage (i.e. kwic, nombre de résultats, breadcrumbs, etc.) sont, quant à elles, définies dans le module **query-tei.xql**. Pour les besoins de notre projet, nous avons modifié la fonction `teis:get-breadcrumbs`.
+Ces règles permettent d’effectuer des recherches dans le texte brut des documents, dont les résultats sont affichés via le template **search.html** (Voir [2.7 L’affichage des résultats](02-templates.md)). Les modalités de recherche et d’affichage (i.e. kwic, nombre de résultats, breadcrumbs, etc.) sont, quant à elles, définies dans le module **query-tei.xql**. Pour les besoins de notre projet, nous avons modifié la fonction `teis:get-breadcrumbs`.
 
 ## 4.2. Les facettes
 Trois étapes sont nécessaires pour paramétrer les facettes : 1) la définition des facettes dans le fichier **index.xql** ; 2) la configuration de l’affichage des facettes avec **config.xqm** ; 3) l’indexation des données avec **collection.xconf**.
@@ -33,10 +33,10 @@ Ces catégories sont ensuite utilisées dans les fichiers TEI, avec un élément
 Dans le fichier **index.xql**, pour chaque catégorie de mots-clés du fichier **taxonomy.xml**, nous créons une fonction qui cible cette catégorie (ex: `idx:get-femenino`) et indexe les mots-clés, afin de créer les facettes correspondantes. Cette fonction est à son tour utilisée par la fonction `idx:get-metadata`.
 
 <img src="images/04-Recherche-FacettesFonction1.png" width="600" alt="Exemple de fonction permettant d’afficher les mots-clés relatifs aux personnages féminins"/>
-<img src="images/04-Recherche-FacettesFonction2.png" width="300" alt="Utilisation de la fonction idx:get-femenino dans la fonction idx:get-metadata"/>
+<img src="images/04-Recherche-FacettesFonction2.png" width="200" alt="Utilisation de la fonction idx:get-femenino dans la fonction idx:get-metadata"/>
 
 ### 4.2.2. Étape 2 : Configuration de l’affichage (config.xqm)
-L’affichage des facettes (via **index.html**) est spécifié dans le fichier **config.xqm**, avec la variable `$config:facets`. Chaque facette est décrite avec une `map`. Celle-ci indique l’identifiant de la facette à paramètrer (i.e. celui défini dans **index.xql**), le titre à afficher, le nombre de facettes maximum à montrer (les autres seront affichées par l’utilisateur en cliquant sur une case), leur aspect hiérarchique (i.e. si les informations sont imbriquées les unes dans les autres), ainsi que la manière de les traduire à l’aide de web-component `<pb-i18n>`.
+L’affichage des facettes (via **index.html**) est spécifié dans le fichier **config.xqm**, avec la variable `$config:facets`. Chaque facette est décrite avec une `map`. Celle-ci indique l’identifiant de la facette à paramètrer (i.e. celui défini dans **index.xql**), le titre à afficher, le nombre de facettes maximum à montrer, leur aspect hiérarchique (i.e. si les informations sont imbriquées les unes dans les autres), ainsi que la manière de les traduire à l’aide du web-component `<pb-i18n>`.
 
 <img src="images/04-Recherche-FacettesConfig.png" width="500" alt="Exemple de paramétrage des facettes avec $config:facets"/>
 

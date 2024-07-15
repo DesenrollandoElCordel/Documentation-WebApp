@@ -10,5 +10,5 @@ Cette documentation explique toutes les étapes qui ont permis d'aboutir au site
 1. [Le multilinguisme](05-multilinguisme.md)
 1. [Les feuilles de style](06-css.md)
 1. [Le responsive design](07-responsiveDesign.md)
-1. Les index de noms de lieux [à venir]
+1. [Les index de noms de lieux](08-indexLieux.md)
 1. [Le déploiement sur serveur](09-serveur.md)
