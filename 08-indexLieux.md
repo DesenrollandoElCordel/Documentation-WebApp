@@ -3,7 +3,7 @@
 La création de l'index des noms de lieu s'appuie sur le [tutoriel](https://faq.teipublisher.com/api/) et le [code](https://github.com/stazh/briefedition-escher) réalisés pour le projet *Briefe Edition*. Cette section détaille les étapes, ainsi que les modifications apportées au code d'origine.
 
 ## 8.1. Création de l'index (places.html)
-<img src="images/08-placesIndex.png" width="500" alt="Capture d'écran de l'index des noms de lieu"/>
+<img src="images/08-placesIndex.png" width="600" alt="Capture d'écran de l'index des noms de lieu"/>
 
 - Création d'un nouveau *API endpoint* dans le fichier **custom-api.json**, en ajoutant un nouveau *path* : `/api/places`.
 - Dans le fichier **custom-api.xql**, ajout d'une première fonction (`api:places`), qui permet d'afficher les noms de lieu par ordre alphabétique.
@@ -24,7 +24,7 @@ La création de l'index des noms de lieu s'appuie sur le [tutoriel](https://faq.
 
 ## 8.2. La notice d'un nom de lieu (place.html)
 
-<img src="images/08-IndexNoticePlace.png" width="500" alt="Notice d'un nom de lieu"/>
+<img src="images/08-IndexNoticePlace.png" width="600" alt="Notice d'un nom de lieu"/>
 
 Les notices des noms de lieu sont créées avec le template **/pages/place.html**. Il contient une carte (`<pb-leaflet-map>`), ainsi que des informations sur l'équivalent Wikidata, les graphies alternatives, le nombre de documents et la liste des documents.
 
